@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 const CheckboxesGroup = ({ label, label2, label3, label4, icon }) => {
     const classes = useStyles();
     const [state, setState] = React.useState({
-        gilad: true,
+        gilad: false,
         jason: false,
         antoine: false,
         ant: false,

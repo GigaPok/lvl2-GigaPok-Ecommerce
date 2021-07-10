@@ -1,5 +1,4 @@
-import { AppBar, Box, Button, Container, Grid, IconButton, Link, makeStyles, Toolbar, Typography } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
+import { AppBar, Box, Container, Grid, Link, makeStyles, Toolbar, Typography } from '@material-ui/core';
 import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
@@ -12,6 +11,11 @@ const useStyles = makeStyles((theme) => ({
     title: {
         flexGrow: 1,
     },
+    rame: {
+        i: {
+            marginRight: '20px',
+        }
+    }
 }));
 
 const Footer = () => {
@@ -23,13 +27,21 @@ const Footer = () => {
             <AppBar position="static">
                 <Container>
                     <Toolbar>
-                        <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                            <MenuIcon />
-                        </IconButton>
                         <Typography variant="h6" className={classes.title}>
-                            News
+                            Get connected with us on social networks!
+
                         </Typography>
-                        <Button color="inherit">Login</Button>
+                        <Box color="inherit" style={{
+                            li: {
+                                marginRight: "20px",
+                            }
+                        }}>
+                            <i class="fab fa-facebook-f"></i>
+                            <i class="fab fa-twitter"></i>
+                            <i class="fab fa-google-plus-g"></i>
+                            <i class="fab fa-invision"></i>
+                            <i class="fab fa-instagram"></i>
+                        </Box>
                     </Toolbar>
                 </Container>
             </AppBar>
