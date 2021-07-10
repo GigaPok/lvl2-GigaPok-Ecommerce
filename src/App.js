@@ -1,3 +1,4 @@
+import { Card } from '@material-ui/core';
 import './App.css';
 import MainPage from './pages/MainPage';
 

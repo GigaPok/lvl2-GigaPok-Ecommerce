@@ -5,11 +5,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import { Box } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        '& > *': {
-            width: '25ch',
-        },
-    },
+
     search: {
         display: 'flex',
         alignItems: 'center'
