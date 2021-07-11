@@ -19,7 +19,7 @@ const useStyles = makeStyles({
     },
 });
 
-const CardItem = () => {
+const CardItem = ({ title, price, image }) => {
     const classes = useStyles();
 
     return (
@@ -29,15 +29,16 @@ const CardItem = () => {
                     <CardActionArea>
                         <CardMedia
                             className={classes.media}
-                            image="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13.jpg"
+                            component='div'
+                            image={image}
                             title="Contemplative Reptile"
                         />
                         <CardContent>
-                            <Typography gutterBottom variant="h5" component="h2">
-                                Red hoodie
+                            <Typography gutterBottom variant="h5">
+                                {title}
                             </Typography>
-                            <Typography gutterBottom variant="h5" component="h2">
-                                $99.99
+                            <Typography gutterBottom variant="h5">
+                                {price}
                             </Typography>
                         </CardContent>
                     </CardActionArea>

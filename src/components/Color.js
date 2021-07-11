@@ -10,7 +10,7 @@ const defaultProps = {
     style: { width: '2rem', height: '2rem' },
 };
 
-export default function BorderRadius() {
+const Colors = () => {
     return (
         <>
             <SideBarTitle text='Color' />
@@ -25,3 +25,5 @@ export default function BorderRadius() {
         </>
     );
 }
+
+export default Colors;

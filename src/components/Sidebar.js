@@ -6,6 +6,7 @@ import Review from '../components/Review';
 import Search from '../components/Search';
 import SideBarTitle from '../components/SideBarTitle';
 import Subcategories from '../components/Subcategories';
+import Colors from './Color';
 import RangePrice from './RangePrice';
 
 
@@ -58,6 +59,7 @@ const SideBar = () => {
             label3={"38"}
             label4={"40"}
         />
+        <Colors></Colors>
 
     </>
     );

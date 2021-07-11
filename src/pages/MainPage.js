@@ -1,10 +1,9 @@
-import { makeStyles } from '@material-ui/core';
+import { CardMedia, makeStyles } from '@material-ui/core';
 import { Box, Grid, Typography } from '@material-ui/core';
-import React, { useState } from 'react';
-import CardItem from '../components/CardItem';
-import Color from '../components/Color';
+import React from 'react';
 import ItemStyle from '../components/ItemStyle';
 import PaginationRanges from '../components/Pagination';
+import ProductList from '../components/ProductList';
 import SideBar from '../components/Sidebar';
 import MainLayout from '../layouts/MainLayout';
 
@@ -15,22 +14,36 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         marginTop: '20px'
     },
+    shopText: {
+        position: 'absolute',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        left: '50%',
+        top: '50%',
+        transform: 'translate(-50%, -50%)',
+    },
+    img: {
+        height: 400,
+    },
 }));
 
 const MainPage = () => {
     const classes = useStyles()
 
-    const [data, setData] = useState([
-        1, 2, 3, 4, 5, 6, 7, 8, 9, , 1, 2, 3
-    ])
-
     return (
         <>
+            <Box style={{ position: 'relative' }}>
+                <CardMedia
+                    className={classes.img}
+                    component="img"
+                    image="https://mdbootstrap.com/img/Photos/Others/clothes(5)-crop.jpg"
+                />
+                <Typography className={classes.shopText} variant="h2">Shop</Typography>
+            </Box>
             <MainLayout>
-                <Grid container spacing={10}>
+                <Grid container spacing={2} wrap>
                     <Grid item xs={4}>
                         <SideBar></SideBar>
-                        <Color />
                     </Grid>
                     <Grid item xs={8}>
                         <Box className={classes.rame}>
@@ -38,19 +51,12 @@ const MainPage = () => {
                             <Typography>Label example</Typography>
                             <PaginationRanges></PaginationRanges>
                         </Box>
-                        <Grid container spacing={2}>
-                            {data.map(el => (
-                                <Grid item xs={3}>
-                                    <CardItem></CardItem>
-                                </Grid>
-                            ))}
-                        </Grid>
+                        <ProductList></ProductList>
                         <Box className={classes.rame}>
                             <ItemStyle></ItemStyle>
                             <Typography>Label example</Typography>
                             <PaginationRanges></PaginationRanges>
                         </Box>
-
                     </Grid>
                 </Grid>
 

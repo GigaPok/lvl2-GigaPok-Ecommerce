@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, CardMedia, Container, Grid, Link, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Box, Button, Container, Grid, Link, Toolbar, Typography } from '@material-ui/core';
 import React from 'react';
 import Footer from '../components/Footer';
 import useStyles from './MainLayoutStyles';
@@ -35,14 +35,7 @@ const MainLayout = ({ children }) => {
                     </Grid>
                 </Grid>
             </Container>
-            <Box style={{ position: 'relative' }}>
-                <CardMedia
-                    className={classes.img}
-                    component="img"
-                    image="https://mdbootstrap.com/img/Photos/Others/clothes(5)-crop.jpg"
-                />
-                <Typography className={classes.shopText} variant="h2">Shop</Typography>
-            </Box>
+
             <Container maxWidth='lg'>
                 {children}
             </Container>
