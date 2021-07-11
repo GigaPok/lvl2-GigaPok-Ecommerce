@@ -30,8 +30,10 @@ const useStyles = makeStyles((theme) => ({
         left: '50%',
         top: '50%',
         transform: 'translate(-50%, -50%)',
-
     },
+    a: {
+        marginRight: '20px',
+    }
 }));
 
 export default useStyles;

@@ -11,10 +11,9 @@ const useStyles = makeStyles((theme) => ({
     title: {
         flexGrow: 1,
     },
-    rame: {
-        i: {
-            marginRight: '20px',
-        }
+    bcolor: {
+        backgroundColor: '#b4b4b4',
+        height: '200px'
     }
 }));
 
@@ -26,26 +25,41 @@ const Footer = () => {
         <>
             <AppBar position="static">
                 <Container>
-                    <Toolbar>
+                    <Toolbar disableGutters={true}>
                         <Typography variant="h6" className={classes.title}>
                             Get connected with us on social networks!
-
                         </Typography>
-                        <Box color="inherit" style={{
-                            li: {
-                                marginRight: "20px",
-                            }
-                        }}>
-                            <i class="fab fa-facebook-f"></i>
-                            <i class="fab fa-twitter"></i>
-                            <i class="fab fa-google-plus-g"></i>
-                            <i class="fab fa-invision"></i>
-                            <i class="fab fa-instagram"></i>
+                        <Box display="flex">
+                            <Box>
+                                <Link color="inherit">
+                                    <i class="fab fa-facebook-f"></i>
+                                </Link>
+                            </Box>
+                            <Box mx={2}>
+                                <Link color="inherit">
+                                    <i class="fab fa-twitter"></i>
+                                </Link>
+                            </Box>
+                            <Box>
+                                <Link color="inherit">
+                                    <i class="fab fa-google-plus-g"></i>
+                                </Link>
+                            </Box>
+                            <Box mx={2}>
+                                <Link color="inherit">
+                                    <i class="fab fa-invision"></i>
+                                </Link>
+                            </Box>
+                            <Box>
+                                <Link color="inherit">
+                                    <i class="fab fa-instagram"></i>
+                                </Link>
+                            </Box>
                         </Box>
                     </Toolbar>
                 </Container>
             </AppBar>
-            <Box bgcolor='text.secondary' color='white'>
+            <Box className={classes.bcolor} color='white'>
                 <Container maxWidth='lg'>
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={3}>
