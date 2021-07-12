@@ -33,14 +33,16 @@ const ProductList = () => {
     ])
 
     return (
-        <Grid container spacing={2}>
-            {data.map((el, index) => (
-                <Grid item xs={3} key={index}>
-                    <CardItem title={el.title} price={el.price} image={el.img}></CardItem>
-                </Grid>
-            ))}
-        </Grid>
+        <>
+            <Grid container spacing={2}>
+                {data.map((el, index) => (
+                    <Grid item md={3} xs={12} sm={6} key={index}>
+                        <CardItem title={el.title} price={el.price} image={el.img} id={el.id}></CardItem>
+                    </Grid>
+                ))}
 
+            </Grid>
+        </>
     );
 };
 

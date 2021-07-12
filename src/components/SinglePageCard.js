@@ -20,20 +20,14 @@ const useStyles = makeStyles((theme) => ({
 const itemData = [
     {
         img: 'https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13a.jpg',
-        title: 'Image',
-        author: 'author',
         cols: 4,
     },
     {
         img: 'https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13a.jpg',
-        title: 'Image',
-        author: 'author',
         cols: 1,
     },
     {
         img: 'https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13a.jpg',
-        title: 'Image',
-        author: 'author',
         cols: 1,
     },
     {
@@ -47,9 +41,8 @@ const itemData = [
 
 ];
 
-const SinglePageCard = () => {
+const SinglePageCard = ({ }) => {
     const classes = useStyles();
-
     return (
         <div className={classes.root}>
             <ImageList rowHeight={360} className={classes.imageList} cols={4}>

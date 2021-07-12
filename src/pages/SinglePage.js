@@ -1,5 +1,6 @@
 import { Box, Container, Grid, makeStyles } from '@material-ui/core';
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import SinglePageAbout from '../components/SinglePageAbout';
 import SinglePageCard from '../components/SinglePageCard';
 import MainLayout from '../layouts/MainLayout';
@@ -12,6 +13,8 @@ const useStyles = makeStyles((theme) => ({
 
 const SinglePage = () => {
     const classes = useStyles()
+
+    // let params = useParams()
 
     return (
         <>

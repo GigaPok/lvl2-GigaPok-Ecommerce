@@ -5,7 +5,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import { Box } from '@material-ui/core';
+import { Link } from '@material-ui/core';
 
 const useStyles = makeStyles({
     root: {
@@ -19,12 +19,12 @@ const useStyles = makeStyles({
     },
 });
 
-const CardItem = ({ title, price, image }) => {
+const CardItem = ({ title, price, image, id }) => {
     const classes = useStyles();
 
     return (
         <>
-            <Box>
+            <Link href={`single/${id}`}>
                 <Card className={classes.root}>
                     <CardActionArea>
                         <CardMedia
@@ -43,7 +43,7 @@ const CardItem = ({ title, price, image }) => {
                         </CardContent>
                     </CardActionArea>
                 </Card>
-            </Box>
+            </Link>
         </>
     );
 }
