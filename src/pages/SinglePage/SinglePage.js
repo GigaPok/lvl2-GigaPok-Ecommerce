@@ -1,11 +1,12 @@
 import { Box, Container, Grid, makeStyles } from '@material-ui/core';
 import React from 'react';
-import MainLayout from '../layouts/MainLayout';
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import ImageList from '@material-ui/core/ImageList';
 import ImageListItem from '@material-ui/core/ImageListItem';
-import { SinglePageAbout } from './components/';
+import { SinglePageAbout } from './components/SinglePageAbout';
+import { getSingleProduct } from '../../services/product';
+import MainLayout from '../../layouts/MainLayout';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -14,39 +15,20 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const SinglePage = () => {
+export const SinglePage = () => {
     const classes = useStyles()
 
     const [data, setData] = useState()
 
-    let { paramId } = useParams()
-
-    console.log("params id", paramId);
+    const { paramId: id } = useParams()
 
     useEffect(() => {
-
-        fetch(`https://fakestoreapi.com/products/${paramId}`)
-            .then(res => res.json())
-            .then(json => {
-                console.log(json);
-                setData(
-
-                    {
-                        title: json.title,
-                        price: json.price,
-                        image: json.image,
-                        id: json.id
-                    }
-                )
-
-            }).catch(err => {
-                console.log(err);
-            })
-    }, [])
+        getSingleProduct(id)
+            .then(data => setData(data));
+    }, [id])
 
     return (
         <>
-
             <MainLayout>
                 <Box my={10} display='flex' justifyContent="center">Product page</Box>
                 <Container>
@@ -72,5 +54,3 @@ const SinglePage = () => {
         </>
     );
 };
-
-export default SinglePage;

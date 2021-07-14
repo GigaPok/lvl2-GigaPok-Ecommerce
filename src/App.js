@@ -3,9 +3,9 @@ import './App.css';
 import Colors from './components/Color';
 import MainPage from './pages/MainPage';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { HOME, Single_Product, Product_List } from './router';
 import NotFound from './pages/NotFound';
-import SinglePage from './pages/SinglePage';
+import { SinglePage } from './pages/SinglePage/SinglePage';
+import { Product_List, HOME } from './Router';
 
 function App() {
 
@@ -14,9 +14,7 @@ function App() {
       <Router>
         <Switch>
           <Route path={Product_List} component={Colors} exact />
-          <Route path='/single/:paramId'>
-            <SinglePage />
-          </Route>
+          <Route path='/single/:paramId' component={SinglePage} exact />
           <Route path={HOME} component={MainPage} exact />
           <Route component={NotFound} />
         </Switch>

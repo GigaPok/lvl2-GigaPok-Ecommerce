@@ -7,7 +7,6 @@ const useStyles = makeStyles((theme) => ({
     root: {
 
     }
-
 }));
 
 export const SinglePageAbout = () => {
