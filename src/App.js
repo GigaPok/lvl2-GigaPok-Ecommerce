@@ -5,7 +5,7 @@ import MainPage from './pages/MainPage';
 import { BrowserRouter as Router } from 'react-router-dom';
 import NotFound from './pages/NotFound';
 import { SinglePage } from './pages/SinglePage/SinglePage';
-import { Product_List, HOME } from './Router';
+import { Product_List, HOME } from './router';
 
 function App() {
 
