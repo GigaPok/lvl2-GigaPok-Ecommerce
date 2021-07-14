@@ -14,7 +14,7 @@ function App() {
       <Router>
         <Switch>
           <Route path={Product_List} component={Colors} exact />
-          <Route path='/single/:paramId' component={SinglePage} exact />
+          <Route path={Single_Product} component={SinglePage} exact />
           <Route path={HOME} component={MainPage} exact />
           <Route component={NotFound} />
         </Switch>
