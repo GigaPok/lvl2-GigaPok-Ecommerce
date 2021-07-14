@@ -41,7 +41,7 @@ IconContainer.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-export default function CardReview() {
+export function CardReview() {
   return (
     <div>
       <Box mb={3} borderColor="transparent">

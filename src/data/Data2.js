@@ -1,17 +1,14 @@
-import { Grid } from '@material-ui/core';
 import React from 'react';
-import CardItem from './CardItem';
-import { useState } from 'react';
 import { useEffect } from 'react';
+import { useState } from 'react';
 
-const ProductList = () => {
-
+const Data2 = () => {
 
     const [data, setData] = useState()
 
     useEffect(() => {
 
-        fetch(`https://fakestoreapi.com/products/`)
+        fetch('https://fakestoreapi.com/products')
             .then(res => res.json())
             .then(json => {
 
@@ -31,21 +28,19 @@ const ProductList = () => {
             })
     }, [])
 
+    console.log('data', data);
+
     return (
         <>
             {data && (
-                <Grid container spacing={2}>
-                    {data.map((el, index) => (
-                        <Grid item md={3} xs={12} sm={6} key={index}>
-                            <CardItem title={data[index].title} price={data[index].price} image={data[index].image} id={data[index].id}></CardItem>
-                        </Grid>
-                    ))}
-
-                </Grid>
+                <div>
+                    <p>{data[0].title}</p>
+                    <p>{data[0].price}</p>
+                    <img src={data[0].image}></img>
+                </div>
             )}
-
         </>
     );
 };
 
-export default ProductList;
+export default Data2;

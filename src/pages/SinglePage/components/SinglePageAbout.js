@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Typography } from '@material-ui/core';
-import CardReview from './CardReview';
+import { CardReview } from './CardReview';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-const SinglePageAbout = () => {
+export const SinglePageAbout = () => {
     const classes = useStyles();
 
     return (
@@ -27,5 +27,3 @@ const SinglePageAbout = () => {
         </Box>
     );
 }
-
-export default SinglePageAbout;
