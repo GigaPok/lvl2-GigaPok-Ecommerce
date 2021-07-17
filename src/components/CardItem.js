@@ -6,6 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
+import { Single_Product_ID } from '../router';
 
 const useStyles = makeStyles({
     root: {
@@ -25,7 +26,7 @@ const CardItem = ({ title, price, image, id }) => {
     const classes = useStyles();
     return (
         <>
-            <Link to={`single/${id}`}>
+            <Link to={`${Single_Product_ID}${id}`}>
                 <Card className={classes.root}>
                     <CardActionArea>
                         <CardMedia

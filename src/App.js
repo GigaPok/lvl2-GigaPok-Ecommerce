@@ -5,7 +5,8 @@ import MainPage from './pages/MainPage';
 import { BrowserRouter as Router } from 'react-router-dom';
 import NotFound from './pages/NotFound';
 import { SinglePage } from './pages/SinglePage/SinglePage';
-import { Product_List, HOME, Single_Product } from './router';
+import { Product_List, HOME, Single_Product, Admin_Panel } from './router';
+import SideBar from './pages/adminPanel/Sidebar';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
           <Route path={Product_List} component={Colors} exact />
           <Route path={Single_Product} component={SinglePage} exact />
           <Route path={HOME} component={MainPage} exact />
+          <Route path={Admin_Panel} component={SideBar} />
           <Route component={NotFound} />
         </Switch>
       </Router>

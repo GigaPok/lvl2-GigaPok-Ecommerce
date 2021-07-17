@@ -59,7 +59,6 @@ const MainPage = () => {
                         </Box>
                     </Grid>
                 </Grid>
-
             </MainLayout>
         </>
     );
