@@ -27,7 +27,7 @@ const AdminPanel = ({ }) => {
                                 <Route path={Add_Product} component={BasicTable} exact />
                                 <Route path={Add_User} component={User} exact />
                                 <Route path={Add_Categorie} component={Categorie} exact />
-                                <Route path={HOME} component={MainPage} exact />
+                                {/* <Route path={HOME} component={MainPage} exact /> */}
                                 <Route component={NotFound} />
                             </Switch>
                         </Grid>
