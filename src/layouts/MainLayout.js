@@ -24,7 +24,7 @@ const MainLayout = ({ children }) => {
                                     <Link color='white' href='/single'>Single Page</Link>
                                 </Box>
                                 <Box mx={2}>
-                                    <Link color='white' to='/'>Contact</Link>
+                                    <Link color='white' href='/admin'>Admin Panel</Link>
                                 </Box>
                                 <Box mr={2}>
                                     <Link color='white'>Sign In</Link>
