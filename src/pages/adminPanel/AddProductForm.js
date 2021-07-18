@@ -10,15 +10,29 @@ const AddProductForm = () => {
         initialValues: {
             Title: '',
             Price: '',
-            email: '',
+            Img: '',
         },
         onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+            fetch('https://fakestoreapi.com/products', {
+
+                method: "POST",
+                body: JSON.stringify(
+                    {
+                        title: values.Title,
+                        price: values.price,
+                        category: values.Img
+                    }
+                )
+            })
+                .then(res => res.json())
+                .then(json => console.log('es', json))
+
+            console.log('values', values);
         },
     });
     return (
         <form className={classes.form} onSubmit={formik.handleSubmit}>
-            <label htmlFor="firstName">Title</label>
+            <label htmlFor="Title">Title</label>
             <input
                 id="Title"
                 name="Title"
@@ -27,7 +41,7 @@ const AddProductForm = () => {
                 value={formik.values.firstName}
             />
 
-            <label htmlFor="lastName">Price</label>
+            <label htmlFor="Price">Price</label>
             <input
                 id="Price"
                 name="Price"
@@ -36,10 +50,10 @@ const AddProductForm = () => {
                 value={formik.values.lastName}
             />
 
-            <label htmlFor="email">Email Address</label>
+            <label htmlFor="IMG">IMG</label>
             <input
-                id="email"
-                name="email"
+                id="Img"
+                name="Img"
                 type="email"
                 onChange={formik.handleChange}
                 value={formik.values.email}

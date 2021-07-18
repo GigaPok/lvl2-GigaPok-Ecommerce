@@ -29,6 +29,7 @@ const AdminSideBar = () => {
 
     return (
         <div className={classes.root}>
+            <Divider />
             <List component="nav" aria-label="secondary mailbox folders">
                 <ListItemLink to={Add_Product} component={Link}>
                     <ListItemText primary="Products" />

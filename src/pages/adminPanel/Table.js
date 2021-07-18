@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -6,57 +6,82 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { Link } from 'react-router-dom'
-import Icon from '@material-ui/core/Icon';
+import { Link, BrowserRouter as Router } from 'react-router-dom'
 import useStyles from './TableStyle'
-import SimpleModal from './Modal';
+import AdminModal from './AdminModal';
+import { getAllProduct } from '../../services/product';
+import { CardMedia } from '@material-ui/core';
+import { Single_Product } from '../../router';
+import Loading from '../../components/Loading';
 
-
-
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
 const BasicTable = () => {
+
+    const [data, setData] = useState()
+    const [loading, setLoading] = useState(false)
+
     const classes = useStyles();
+
+    useEffect(() => {
+        setLoading(true)
+        getAllProduct()
+            .then(data => setData(data))
+            .finally(() => setLoading(false))
+    }, [])
+
+    const title = ['ID', 'Title', 'Price', 'IMG']
 
     return (
         <>
-            <SimpleModal></SimpleModal>
-            <TableContainer component={Paper}>
-                <Table className={classes.table} aria-label="simple table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Dessert (100g serving)</TableCell>
-                            <TableCell align="right">Calories</TableCell>
-                            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                            <TableCell align="right">Protein&nbsp;(g)</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows.map((row) => (
-                            <TableRow key={row.name}>
-                                <TableCell component="th" scope="row">
-                                    {row.name}
-                                </TableCell>
-                                <TableCell align="right">{row.calories}</TableCell>
-                                <TableCell align="right">{row.fat}</TableCell>
-                                <TableCell align="right">{row.carbs}</TableCell>
-                                <TableCell align="right">{row.protein}</TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+            {data && (
+                <>
+                    <Loading isLoading={loading}>
+                        <AdminModal></AdminModal>
+                        <TableContainer component={Paper}>
+                            <Table className={classes.table} aria-label="simple table">
+                                <TableHead>
+                                    <TableRow>
+                                        {title.map((el, index) => (
+                                            <TableCell>{el}</TableCell>
+                                        ))}
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    <Router>
+                                        {data.map((el, index) => (
+
+                                            <TableRow key={el.id}>
+                                                <TableCell component="th" scope="row">
+                                                    <Link className={classes.decNone} to={Single_Product.replace(':paramId', el.id)}>
+                                                        {data[index].id}
+                                                    </Link>
+                                                </TableCell>
+                                                <TableCell component="th" scope="row">
+                                                    <Link className={classes.decNone} to={Single_Product.replace(':paramId', el.id)}>
+                                                        {data[index].title}
+                                                    </Link>
+                                                </TableCell>
+                                                <TableCell component="th" scope="row">
+                                                    <Link className={classes.decNone} to={Single_Product.replace(':paramId', el.id)}>
+                                                        {data[index].price}
+                                                    </Link>
+                                                </TableCell>
+                                                <TableCell component="th" scope="row">
+                                                    <Link className={classes.decNone} to={Single_Product.replace(':paramId', el.id)}>
+                                                        <CardMedia className={classes.imgsize} image={data[index].image} />
+                                                    </Link>
+                                                </TableCell>
+                                            </TableRow>
+                                        ))}
+                                    </Router>
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </Loading>
+                </>
+            )
+            }
+
         </>
     );
 }

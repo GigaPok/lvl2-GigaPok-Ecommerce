@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const SimpleModal = () => {
+const AdminModal = () => {
     const classes = useStyles();
 
     const [modalStyle] = React.useState(getModalStyle);
@@ -55,9 +55,11 @@ const SimpleModal = () => {
 
     return (
         <div>
-            <Box onClick={handleOpen} display='flex'>
-                <Icon className="fa fa-plus-circle" color="primary" />
-                <Link>დამატება</Link>
+            <Box my={2} onClick={handleOpen} display='flex' justifyContent="center">
+                <Icon style={{ cursor: 'pointer' }} className="fa fa-plus-circle" color="primary" />
+                <Box ml={1}>
+                    <Link style={{ textDecoration: 'none' }} >დამატება</Link>
+                </Box>
             </Box>
             <Modal
                 open={open}
@@ -71,4 +73,4 @@ const SimpleModal = () => {
     );
 }
 
-export default SimpleModal;
+export default AdminModal;

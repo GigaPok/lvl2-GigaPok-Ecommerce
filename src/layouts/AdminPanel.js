@@ -16,11 +16,11 @@ const AdminPanel = ({ }) => {
 
     return (
         <>
-            <Container>
+            <Container maxWidth={false}>
                 <Router>
                     <Grid container spacing={4}>
-                        <Grid item xs={12} md={4}>
-                            <AdminSideBar></AdminSideBar>
+                        <Grid item xs={12} md={4} >
+                            <AdminSideBar ></AdminSideBar>
                         </Grid>
                         <Grid item xs={12} md={8}>
                             <Switch>
