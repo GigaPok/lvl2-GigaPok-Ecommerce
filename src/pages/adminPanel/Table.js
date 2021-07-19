@@ -31,6 +31,7 @@ const BasicTable = () => {
 
     const title = ['ID', 'Title', 'Price', 'IMG']
 
+
     return (
         <>
             {data && (
@@ -47,33 +48,36 @@ const BasicTable = () => {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    <Router>
-                                        {data.map((el, index) => (
+                                    {data.map((el, index) => {
 
+                                        const link = Single_Product.replace(':paramId', el.id)
+
+                                        return (
                                             <TableRow key={el.id}>
                                                 <TableCell component="th" scope="row">
-                                                    <Link className={classes.decNone} to={Single_Product.replace(':paramId', el.id)}>
+                                                    <Link target='_blank' className={classes.decNone} to={link}>
                                                         {data[index].id}
                                                     </Link>
                                                 </TableCell>
                                                 <TableCell component="th" scope="row">
-                                                    <Link className={classes.decNone} to={Single_Product.replace(':paramId', el.id)}>
+                                                    <Link className={classes.decNone} to={link}>
                                                         {data[index].title}
                                                     </Link>
                                                 </TableCell>
                                                 <TableCell component="th" scope="row">
-                                                    <Link className={classes.decNone} to={Single_Product.replace(':paramId', el.id)}>
+                                                    <Link className={classes.decNone} to={link}>
                                                         {data[index].price}
                                                     </Link>
                                                 </TableCell>
                                                 <TableCell component="th" scope="row">
-                                                    <Link className={classes.decNone} to={Single_Product.replace(':paramId', el.id)}>
+                                                    <Link className={classes.decNone} to={link}>
                                                         <CardMedia className={classes.imgsize} image={data[index].image} />
                                                     </Link>
                                                 </TableCell>
                                             </TableRow>
-                                        ))}
-                                    </Router>
+                                        )
+                                    }
+                                    )}
                                 </TableBody>
                             </Table>
                         </TableContainer>

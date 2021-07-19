@@ -17,22 +17,17 @@ const AdminPanel = ({ }) => {
     return (
         <>
             <Container maxWidth={false}>
-                <Router>
-                    <Grid container spacing={4}>
-                        <Grid item xs={12} md={4} >
-                            <AdminSideBar ></AdminSideBar>
-                        </Grid>
-                        <Grid item xs={12} md={8}>
-                            <Switch>
-                                <Route path={Add_Product} component={BasicTable} exact />
-                                <Route path={Add_User} component={User} exact />
-                                <Route path={Add_Categorie} component={Categorie} exact />
-                                {/* <Route path={HOME} component={MainPage} exact /> */}
-                                <Route component={NotFound} />
-                            </Switch>
-                        </Grid>
+                <Grid container spacing={4}>
+                    <Grid item xs={12} md={4} >
+                        <AdminSideBar ></AdminSideBar>
                     </Grid>
-                </Router>
+                    <Grid item xs={12} md={8}>
+                        <Route path={Add_Product} component={BasicTable} exact />
+                        <Route path={Add_User} component={User} exact />
+                        <Route path={Add_Categorie} component={Categorie} exact />
+                        {/* <Route path={HOME} component={MainPage} exact /> */}
+                    </Grid>
+                </Grid>
             </Container>
         </>
     );
