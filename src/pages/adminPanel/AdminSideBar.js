@@ -6,7 +6,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { Add_Categorie, Add_Product, Add_User, HOME } from '../../router';
-import MainPage from '../MainPage';
 
 const useStyles = makeStyles((theme) => ({
     root: {
