@@ -17,7 +17,7 @@ const MainLayout = ({ children }) => {
                         <AppBar position="fixed" color='white'>
                             <Toolbar variant="dense">
                                 <Typography variant="h6" className={classes.title}>
-                                    <Link href='/'>
+                                    <Link to='/'>
                                         <i class="fab fa-mdb fa-3x" alt="mdb logo"></i>
                                     </Link>
                                 </Typography>

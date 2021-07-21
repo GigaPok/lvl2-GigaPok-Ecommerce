@@ -7,8 +7,8 @@ import NotFound from './pages/NotFound';
 import { SinglePage } from './pages/SinglePage/SinglePage';
 import { Product_List, HOME, Single_Product, Admin_Panel, Sign_In, Sign_Up } from './router';
 import AdminPanel from './layouts/AdminPanel'
-import SignIn from './components/SignIn';
-import SignUp from './components/SignUp';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
 
 function App() {
 
