@@ -8,12 +8,7 @@ import SideBar from '../components/Sidebar';
 import MainLayout from '../layouts/MainLayout';
 
 const useStyles = makeStyles((theme) => ({
-    rame: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginTop: '20px'
-    },
+
     shopText: {
         position: 'absolute',
         marginLeft: 'auto',
@@ -46,16 +41,9 @@ const MainPage = () => {
                         <SideBar></SideBar>
                     </Grid>
                     <Grid item xs={12} md={8}>
-                        <Box className={classes.rame}>
-                            <ItemStyle></ItemStyle>
-                            <Typography>Label example</Typography>
-                            <PaginationRanges></PaginationRanges>
-                        </Box>
+
                         <ProductList></ProductList>
                         <Box className={classes.rame}>
-                            <ItemStyle></ItemStyle>
-                            <Typography>Label example</Typography>
-                            <PaginationRanges></PaginationRanges>
                         </Box>
                     </Grid>
                 </Grid>

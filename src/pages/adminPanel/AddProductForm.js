@@ -23,18 +23,11 @@ const AddProductForm = () => {
             setDisable(true)
 
             createProduct(values)
-                .then(respons => {
-                    if (respons.ok) {
-                        console.log('resp', respons);
-                        return respons.json()
-                    } else {
-                        setMsg('error')
-                    }
-                }).catch((error) => {
+                .then(json => console.log('Response', json))
+                .catch((error) => {
                     setMsg('error')
                     console.log(error);
                 })
-                .then(json => console.log('Response', json))
                 .finally(() => {
 
                     setMsg('success')
@@ -75,14 +68,14 @@ const AddProductForm = () => {
                 <input
                     id="Img"
                     name="Img"
-                    type="email"
+                    type="text"
                     onChange={formik.handleChange}
                     value={formik.values.email}
                 />
 
                 <button disabled={disable} type="submit">Submit</button>
             </form>
-            {success ? <ALertMsg success={success} msg={msg} /> : ''}
+            {success ? <ALertMsg msg={msg} /> : ''}
         </>
     );
 };

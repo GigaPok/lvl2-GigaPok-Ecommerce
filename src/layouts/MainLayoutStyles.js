@@ -21,7 +21,8 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
     },
     a: {
-        marginRight: '20px',
+        textDecoration: 'none',
+        color: 'black'
     }
 }));
 

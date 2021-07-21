@@ -5,8 +5,10 @@ import MainPage from './pages/MainPage';
 import { BrowserRouter as Router } from 'react-router-dom';
 import NotFound from './pages/NotFound';
 import { SinglePage } from './pages/SinglePage/SinglePage';
-import { Product_List, HOME, Single_Product, Admin_Panel } from './router';
+import { Product_List, HOME, Single_Product, Admin_Panel, Sign_In, Sign_Up } from './router';
 import AdminPanel from './layouts/AdminPanel'
+import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
 
 function App() {
 
@@ -18,6 +20,8 @@ function App() {
           <Route path={Single_Product} component={SinglePage} exact />
           <Route path={HOME} component={MainPage} exact />
           <Route path={Admin_Panel} component={AdminPanel} />
+          <Route path={Sign_In} component={SignIn} exact />
+          <Route path={Sign_Up} component={SignUp} exact />
           <Route component={NotFound} />
         </Switch>
       </Router>

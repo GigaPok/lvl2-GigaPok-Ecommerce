@@ -1,6 +1,8 @@
-import { AppBar, Box, Button, Container, Grid, Link, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Box, Button, Container, Grid, Toolbar, Typography } from '@material-ui/core';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
+import { Admin_Panel, Sign_In, Sign_Up } from '../router';
 import useStyles from './MainLayoutStyles';
 
 const MainLayout = ({ children }) => {
@@ -14,22 +16,23 @@ const MainLayout = ({ children }) => {
                     <Grid item xs={12}>
                         <AppBar position="fixed" color='white'>
                             <Toolbar variant="dense">
-
                                 <Typography variant="h6" className={classes.title}>
                                     <Link href='/'>
                                         <i class="fab fa-mdb fa-3x" alt="mdb logo"></i>
                                     </Link>
                                 </Typography>
                                 <Box>
-                                    <Link color='white' href='/single'>Single Page</Link>
+                                    <Link className={classes.a} color='white'>Contact</Link>
                                 </Box>
                                 <Box mx={2}>
-                                    <Link color='white' href='/admin'>Admin Panel</Link>
+                                    <Link className={classes.a} color='white' to={Admin_Panel}>Admin Panel</Link>
                                 </Box>
                                 <Box mr={2}>
-                                    <Link color='white'>Sign In</Link>
+                                    <Link className={classes.a} to={Sign_In} color='white'>Sign In</Link>
                                 </Box>
-                                <Button variant="contained" color="primary">Sign Up</Button>
+                                <Link to={Sign_Up}>
+                                    <Button variant="contained" color="primary">Sign Up</Button>
+                                </Link>
                             </Toolbar>
                         </AppBar>
                     </Grid>
