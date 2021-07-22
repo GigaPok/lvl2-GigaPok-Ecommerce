@@ -6,8 +6,6 @@ import { createProduct } from '../../services/product'
 
 const AddProductForm = () => {
 
-    const [disable, setDisable] = useState(false)
-
     const [success, setSuccess] = useState(false)
     const [msg, setMsg] = useState('')
 
@@ -19,8 +17,7 @@ const AddProductForm = () => {
             Price: '',
             Img: '',
         },
-        onSubmit: values => {
-            setDisable(true)
+        onSubmit: (values, { setSubmitting }) => {
 
             createProduct(values)
                 .then(json => console.log('Response', json))
@@ -33,7 +30,7 @@ const AddProductForm = () => {
                     setMsg('success')
                     setSuccess(true)
 
-                    setDisable(false)
+                    setSubmitting(false);
 
                     setTimeout(() => {
                         setSuccess(false)
@@ -41,6 +38,7 @@ const AddProductForm = () => {
                 })
 
             console.log('values', values);
+
         },
     });
     return (
@@ -73,7 +71,7 @@ const AddProductForm = () => {
                     value={formik.values.email}
                 />
 
-                <button disabled={disable} type="submit">Submit</button>
+                <button disabled={formik.isSubmitting} type="submit">Submit</button>
             </form>
             {success ? <ALertMsg msg={msg} /> : ''}
         </>

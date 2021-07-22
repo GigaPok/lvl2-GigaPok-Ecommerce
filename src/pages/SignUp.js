@@ -11,50 +11,59 @@ const SignUp = () => {
     const formik = useFormik({
         initialValues: {
             firstname: '',
-            lastname: '',
-            password: '',
             email: '',
-            phonenumber: '',
+            password: '',
+            password_confirmation: '',
         },
         onSubmit: values => {
             console.log(values);
+
+            fetch('http://159.65.126.180/api/register', {
+                method: "POST",
+                body: JSON.stringify(
+                    {
+                        name: values.firstname,
+                        email: values.email,
+                        password: values.password,
+                        password_confirmation: values.password_confirmation
+                    }
+                )
+            })
+                .then(res => res.json())
+                .then(json => console.log('data bolos', json))
         },
     });
 
     return (
         <>
+            <Box mt={10} textAlign='center' className={classes.title}>Sign Up</Box >
             <MainLayout>
-                <Box mt={10} textAlign='center'>Sign Up</Box >
                 <Box my={20}>
                     <form onSubmit={formik.handleSubmit}>
-                        <Grid container direction={"column"} spacing={5} display='flex' alignItems='center'>
-                            <Grid item xs={12}>
+                        <Grid container spacing={5} display='flex' alignItems='center'>
+                            <Grid item md={6} className={classes.item}>
                                 <TextField
+                                    className={classes.root}
                                     id="firstname"
                                     label="First Name"
                                     variant="outlined"
                                     onChange={formik.handleChange}
                                     value={formik.values.firstname}
                                 />
-                                <TextField
-                                    id="lastname"
-                                    label="Last Name"
-                                    variant="outlined"
-                                    onChange={formik.handleChange}
-                                    value={formik.values.lastname}
-                                />
                             </Grid>
-                            <Grid item item xs={12}>
+                            <Grid item md={6} className={classes.item}>
                                 <TextField
+                                    className={classes.root}
                                     id="email"
-                                    label="Your Email"
+                                    label="Email"
                                     variant="outlined"
                                     onChange={formik.handleChange}
                                     value={formik.values.email}
                                 />
                             </Grid>
-                            <Grid item>
+                            <Grid item xs={12} className={classes.item}>
                                 <TextField
+                                    className={classes.root}
                                     id="password"
                                     label="Your Password"
                                     variant="outlined"
@@ -62,20 +71,22 @@ const SignUp = () => {
                                     value={formik.values.password}
                                 />
                             </Grid>
-
-                            <Grid item>
+                            <Grid item xs={12} className={classes.item}>
                                 <TextField
-                                    id="phonenumber"
-                                    label="Phone Number"
+                                    className={classes.root}
+                                    id="password_confirmation"
+                                    label="Password Confirmation"
                                     variant="outlined"
                                     onChange={formik.handleChange}
-                                    value={formik.values.phonenumber}
+                                    value={formik.values.password_confirmation}
                                 />
                             </Grid>
-                            <Grid item>
-                                <Button type='submit' variant="contained" color="primary">
-                                    Sign Up
-                                </Button>
+                            <Grid item xs={12} className={classes.item}>
+                                <Box display='flex' justifyContent='center'>
+                                    <Button type='submit' variant="contained" color="primary">
+                                        Sign Up
+                                    </Button>
+                                </Box>
                             </Grid>
                         </Grid>
                     </form>

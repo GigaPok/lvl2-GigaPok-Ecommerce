@@ -15,18 +15,30 @@ const SignIn = () => {
         },
         onSubmit: values => {
             console.log(values);
+
+            fetch('http://159.65.126.180/api/auth/login', {
+                method: "POST",
+                body: JSON.stringify(
+                    {
+                        email: values.email,
+                        password: values.password,
+                    }
+                )
+            })
+                .then(res => res.json())
+                .then(json => console.log(json))
         },
     });
-
     return (
         <>
+            <Box mt={10} textAlign='center' className={classes.title}>Sign In</Box >
             <MainLayout>
-                <Box mt={10} textAlign='center'>Sign In</Box >
                 <Box my={20}>
                     <form onSubmit={formik.handleSubmit}>
-                        <Grid container direction={"column"} spacing={5} display='flex' alignItems='center'>
-                            <Grid item>
+                        <Grid container spacing={5} display='flex' alignItems='center' justifyContent='center'>
+                            <Grid item xs={7} className={classes.item}>
                                 <TextField
+                                    className={classes.root}
                                     id="email"
                                     label="Your Email"
                                     variant="outlined"
@@ -34,8 +46,9 @@ const SignIn = () => {
                                     value={formik.values.email}
                                 />
                             </Grid>
-                            <Grid item>
+                            <Grid item item xs={7} className={classes.item}>
                                 <TextField
+                                    className={classes.root}
                                     id="password"
                                     label="Password"
                                     variant="outlined"
@@ -43,10 +56,12 @@ const SignIn = () => {
                                     value={formik.values.password}
                                 />
                             </Grid>
-                            <Grid item>
-                                <Button type='submit' variant="contained" color="primary">
-                                    Sign In
-                                </Button>
+                            <Grid item item xs={12}>
+                                <Box display='flex' justifyContent='center'>
+                                    <Button type='submit' variant="contained" color="primary">
+                                        Sign In
+                                    </Button>
+                                </Box>
                             </Grid>
                         </Grid>
                     </form>
