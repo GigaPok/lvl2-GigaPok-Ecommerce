@@ -43,7 +43,7 @@ export const SinglePage = () => {
                                     <div className={classes.root}>
                                         <ImageList rowHeight={360} className={classes.imageList} cols={4}>
                                             <ImageListItem key={data.id} cols={data.cols || 1}>
-                                                <img src={data.image} />
+                                                <img src={data.image} alt={data.id} />
                                             </ImageListItem>
                                         </ImageList>
                                     </div>

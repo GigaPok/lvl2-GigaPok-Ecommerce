@@ -23,12 +23,19 @@ const SignIn = () => {
                         email: values.email,
                         password: values.password,
                     }
-                )
-            })
+                ),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            }).catch(error => console.log(error))
                 .then(res => res.json())
-                .then(json => console.log(json))
+                .then(json => {
+                    localStorage.setItem('userInfo', JSON.stringify(json));
+                })
         },
     });
+
     return (
         <>
             <Box mt={10} textAlign='center' className={classes.title}>Sign In</Box >
@@ -46,7 +53,7 @@ const SignIn = () => {
                                     value={formik.values.email}
                                 />
                             </Grid>
-                            <Grid item item xs={7} className={classes.item}>
+                            <Grid item xs={7} className={classes.item}>
                                 <TextField
                                     className={classes.root}
                                     id="password"
@@ -56,7 +63,7 @@ const SignIn = () => {
                                     value={formik.values.password}
                                 />
                             </Grid>
-                            <Grid item item xs={12}>
+                            <Grid item xs={12}>
                                 <Box display='flex' justifyContent='center'>
                                     <Button type='submit' variant="contained" color="primary">
                                         Sign In

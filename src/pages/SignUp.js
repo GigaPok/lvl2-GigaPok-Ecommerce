@@ -1,10 +1,15 @@
 import { Box, Button, Grid, TextField } from '@material-ui/core';
 import { useFormik } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 import { useStyles } from './SignInStyle';
+import { Sign_In } from '../router';
 
 const SignUp = () => {
+
+
+    const [login, setLogin] = useState(false)
 
     const classes = useStyles()
 
@@ -19,18 +24,30 @@ const SignUp = () => {
             console.log(values);
 
             fetch('http://159.65.126.180/api/register', {
+
                 method: "POST",
                 body: JSON.stringify(
+
                     {
                         name: values.firstname,
                         email: values.email,
                         password: values.password,
                         password_confirmation: values.password_confirmation
-                    }
-                )
+                    },
+
+                ),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
             })
-                .then(res => res.json())
-                .then(json => console.log('data bolos', json))
+                .then(
+                    setTimeout(() => {
+                        setLogin(true)
+                    }, 500)
+                )
+                .catch(error => console.log(error))
+
         },
     });
 
@@ -93,6 +110,7 @@ const SignUp = () => {
                 </Box>
 
             </MainLayout>
+            {login && <Redirect to={Sign_In} />}
         </>
     );
 };

@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Search = ({ label, noshow }) => {
     const classes = useStyles();
-    const [show, setShow] = useState()
+    const [show, setShow] = useState(true)
 
     useEffect(() => {
         setShow(noshow)

@@ -7,8 +7,7 @@ import Categorie from '../pages/adminPanel/Categorie';
 import { Add_Categorie, Add_Product, Add_User } from '../router';
 import AdminSideBar from '../pages/adminPanel/AdminSideBar';
 
-const AdminPanel = ({ }) => {
-
+const AdminPanel = () => {
 
     return (
         <>

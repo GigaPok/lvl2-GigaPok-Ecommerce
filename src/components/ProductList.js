@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { getAllProduct } from '../services/product';
 import Loading from './Loading';
-import PaginationRanges from './Pagination';
 import useStyles from './productListStyle';
 import ItemStyle from './ItemStyle';
 import Pagination from '@material-ui/lab/Pagination';

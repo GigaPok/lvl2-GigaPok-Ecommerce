@@ -1,8 +1,6 @@
 import { CardMedia, makeStyles } from '@material-ui/core';
 import { Box, Grid, Typography } from '@material-ui/core';
 import React from 'react';
-import ItemStyle from '../components/ItemStyle';
-import PaginationRanges from '../components/Pagination';
 import ProductList from '../components/ProductList';
 import SideBar from '../components/Sidebar';
 import MainLayout from '../layouts/MainLayout';
