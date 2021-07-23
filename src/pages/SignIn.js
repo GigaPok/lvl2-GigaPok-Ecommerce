@@ -1,12 +1,18 @@
 import { Box, Button, Grid, TextField } from '@material-ui/core';
 import { Form, Formik, useFormik } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
 import MainLayout from '../layouts/MainLayout';
 import { useStyles } from './SignInStyle';
 import * as Yup from 'yup';
+import ALertMsg from '../components/AlertMsg';
 
 
 const SignIn = () => {
+
+    const [success, setSuccess] = useState(false)
+    const [msg, setMsg] = useState('')
+    const [succesText, setSuccessText] = useState('')
+    const [errorText, setErrorText] = useState('')
 
     const classes = useStyles()
 
@@ -51,7 +57,16 @@ const SignIn = () => {
                             }).catch(error => console.log(error))
                                 .then(res => res.json())
                                 .then(json => {
-                                    localStorage.setItem('userInfo', JSON.stringify(json));
+                                    localStorage.setItem('userInfo', JSON.stringify(json),
+
+                                        setMsg('success'),
+                                        setSuccess(true),
+                                        setSuccessText('ინფორმაცია სწორია'),
+
+                                        setTimeout(() => {
+                                            setSuccess(false)
+                                        }, 2000)
+                                    );
                                 })
                         }} >
                         {({ errors, touched, handleChange, values }) => (
@@ -93,6 +108,7 @@ const SignIn = () => {
                                                 Sign In
                                             </Button>
                                         </Box>
+                                        {success ? <ALertMsg msg={msg} succesText={succesText} errorText={errorText} /> : ''}
                                     </Grid>
                                 </Grid>
                             </Form>

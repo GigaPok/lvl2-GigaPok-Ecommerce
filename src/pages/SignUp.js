@@ -6,8 +6,17 @@ import MainLayout from '../layouts/MainLayout';
 import { useStyles } from './SignInStyle';
 import { Sign_In } from '../router';
 import * as Yup from 'yup';
+import ALertMsg from '../components/AlertMsg';
 
 const SignUp = () => {
+
+    const [success, setSuccess] = useState(false)
+    const [msg, setMsg] = useState('')
+    const [succesText, setSuccessText] = useState('')
+    const [errorText, setErrorText] = useState('')
+
+    const [login, setLogin] = useState(false)
+
 
     const SignupSchema = Yup.object().shape({
         firstname: Yup.string()
@@ -26,7 +35,6 @@ const SignUp = () => {
         email: Yup.string().email('Invalid email').required('Required'),
     });
 
-    const [login, setLogin] = useState(false)
 
     const classes = useStyles()
 
@@ -65,9 +73,13 @@ const SignUp = () => {
                                     'Accept': 'application/json'
                                 }
                             }).then(
+                                setMsg('success'),
+                                setSuccess(true),
+                                setSuccessText('თქვენ წარმატებით დარეგისტრირდით'),
+
                                 setTimeout(() => {
                                     setLogin(true)
-                                }, 500)
+                                }, 1500)
                             )
 
                                 .catch(error => console.log(error))
@@ -141,6 +153,7 @@ const SignUp = () => {
                                                 Sign Up
                                             </Button>
                                         </Box>
+                                        {success ? <ALertMsg msg={msg} succesText={succesText} errorText={errorText} /> : ''}
                                     </Grid>
                                 </Grid>
                             </Form>
@@ -149,7 +162,6 @@ const SignUp = () => {
                     </Formik>
 
                 </Box>
-
             </MainLayout>
             {login && <Redirect to={Sign_In} />}
         </>

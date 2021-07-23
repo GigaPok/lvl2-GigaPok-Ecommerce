@@ -8,6 +8,8 @@ const AddProductForm = () => {
 
     const [success, setSuccess] = useState(false)
     const [msg, setMsg] = useState('')
+    const [succesText, setSuccessText] = useState('')
+    const [errorText, setErrorText] = useState('')
 
     const classes = useStyles();
 
@@ -23,12 +25,18 @@ const AddProductForm = () => {
                 .then(json => console.log('Response', json))
                 .catch((error) => {
                     setMsg('error')
+
+                    setErrorText('დაფიქსირდა შეცდომა')
+
                     console.log(error);
                 })
                 .finally(() => {
 
                     setMsg('success')
+
                     setSuccess(true)
+                    setSuccessText('წარმატებით დაემატა')
+                    setMsg('success')
 
                     setSubmitting(false);
 
@@ -73,7 +81,7 @@ const AddProductForm = () => {
 
                 <button disabled={formik.isSubmitting} type="submit">Submit</button>
             </form>
-            {success ? <ALertMsg msg={msg} /> : ''}
+            {success ? <ALertMsg msg={msg} succesText={succesText} errorText={errorText} /> : ''}
         </>
     );
 };

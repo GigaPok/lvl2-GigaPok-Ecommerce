@@ -6,10 +6,10 @@ function Alert(props) {
 }
 
 
-const ALertMsg = ({ msg }) => {
+const ALertMsg = ({ msg, succesText, errorText }) => {
 
   return (
-    <Alert severity={msg}>{msg === 'success' ? 'This is a success message!' : 'This is a error message!'}</Alert>
+    <Alert severity={msg}>{msg === 'success' ? `${succesText}` : `${errorText}`}</Alert>
   );
 }
 
