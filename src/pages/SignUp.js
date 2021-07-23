@@ -79,7 +79,7 @@ const SignUp = () => {
                                         <TextField
                                             className={classes.root}
                                             id="firstname"
-                                            placeholder="First Name"
+                                            label="First Name"
                                             onChange={handleChange}
                                             value={values.firstname}
                                             variant="outlined"
@@ -94,7 +94,7 @@ const SignUp = () => {
                                         <TextField
                                             className={classes.root}
                                             id="email"
-                                            placeholder="Email"
+                                            label="Email"
                                             onChange={handleChange}
                                             value={values.email}
                                             variant="outlined"
@@ -109,7 +109,7 @@ const SignUp = () => {
                                         <TextField
                                             className={classes.root}
                                             id="password"
-                                            placeholder="Your Password"
+                                            label="Your Password"
                                             onChange={handleChange}
                                             value={values.password}
                                             variant="outlined"
@@ -124,7 +124,7 @@ const SignUp = () => {
                                         <TextField
                                             className={classes.root}
                                             id="password_confirmation"
-                                            placeholder="Password Confirmation"
+                                            label="Password Confirmation"
                                             onChange={handleChange}
                                             value={values.password_confirmation}
                                             variant="outlined"
