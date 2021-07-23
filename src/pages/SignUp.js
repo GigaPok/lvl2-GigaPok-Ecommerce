@@ -1,112 +1,153 @@
 import { Box, Button, Grid, TextField } from '@material-ui/core';
-import { useFormik } from 'formik';
+import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 import { useStyles } from './SignInStyle';
 import { Sign_In } from '../router';
+import * as Yup from 'yup';
 
 const SignUp = () => {
 
+    const SignupSchema = Yup.object().shape({
+        firstname: Yup.string()
+            .min(2, 'Too Short!')
+            .max(50, 'Too Long!')
+            .required('Required'),
+        password: Yup.string()
+            .min(6, 'Too Short!')
+            .max(50, 'Too Long!')
+            .required('Required'),
+        password_confirmation: Yup.string()
+            .min(6, 'Too Short!')
+            .max(50, 'Too Long!')
+            .oneOf([Yup.ref('password'), null], 'Passwords must match')
+            .required('Required'),
+        email: Yup.string().email('Invalid email').required('Required'),
+    });
 
     const [login, setLogin] = useState(false)
 
     const classes = useStyles()
-
-    const formik = useFormik({
-        initialValues: {
-            firstname: '',
-            email: '',
-            password: '',
-            password_confirmation: '',
-        },
-        onSubmit: values => {
-            console.log(values);
-
-            fetch('http://159.65.126.180/api/register', {
-
-                method: "POST",
-                body: JSON.stringify(
-
-                    {
-                        name: values.firstname,
-                        email: values.email,
-                        password: values.password,
-                        password_confirmation: values.password_confirmation
-                    },
-
-                ),
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                }
-            })
-                .then(
-                    setTimeout(() => {
-                        setLogin(true)
-                    }, 500)
-                )
-                .catch(error => console.log(error))
-
-        },
-    });
 
     return (
         <>
             <Box mt={10} textAlign='center' className={classes.title}>Sign Up</Box >
             <MainLayout>
                 <Box my={20}>
-                    <form onSubmit={formik.handleSubmit}>
-                        <Grid container spacing={5} display='flex' alignItems='center'>
-                            <Grid item md={6} className={classes.item}>
-                                <TextField
-                                    className={classes.root}
-                                    id="firstname"
-                                    label="First Name"
-                                    variant="outlined"
-                                    onChange={formik.handleChange}
-                                    value={formik.values.firstname}
-                                />
-                            </Grid>
-                            <Grid item md={6} className={classes.item}>
-                                <TextField
-                                    className={classes.root}
-                                    id="email"
-                                    label="Email"
-                                    variant="outlined"
-                                    onChange={formik.handleChange}
-                                    value={formik.values.email}
-                                />
-                            </Grid>
-                            <Grid item xs={12} className={classes.item}>
-                                <TextField
-                                    className={classes.root}
-                                    id="password"
-                                    label="Your Password"
-                                    variant="outlined"
-                                    onChange={formik.handleChange}
-                                    value={formik.values.password}
-                                />
-                            </Grid>
-                            <Grid item xs={12} className={classes.item}>
-                                <TextField
-                                    className={classes.root}
-                                    id="password_confirmation"
-                                    label="Password Confirmation"
-                                    variant="outlined"
-                                    onChange={formik.handleChange}
-                                    value={formik.values.password_confirmation}
-                                />
-                            </Grid>
-                            <Grid item xs={12} className={classes.item}>
-                                <Box display='flex' justifyContent='center'>
-                                    <Button type='submit' variant="contained" color="primary">
-                                        Sign Up
-                                    </Button>
-                                </Box>
-                            </Grid>
-                        </Grid>
-                    </form>
+                    <Formik
+                        initialValues={{
+                            firstname: '',
+                            email: '',
+                            password: '',
+                            password_confirmation: '',
+                        }}
+                        validationSchema={SignupSchema}
+                        onSubmit={values => {
+
+                            console.log(values);
+
+                            fetch('http://159.65.126.180/api/register', {
+
+                                method: "POST",
+                                body: JSON.stringify(
+
+                                    {
+                                        name: values.firstname,
+                                        email: values.email,
+                                        password: values.password,
+                                        password_confirmation: values.password_confirmation
+                                    },
+
+                                ),
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Accept': 'application/json'
+                                }
+                            }).then(
+                                setTimeout(() => {
+                                    setLogin(true)
+                                }, 500)
+                            )
+
+                                .catch(error => console.log(error))
+                        }}>
+                        {({ errors, touched, handleChange, values }) => (
+                            <Form>
+                                <Grid container spacing={5} display='flex' alignItems='center'>
+                                    <Grid item md={6} className={classes.item}>
+                                        <TextField
+                                            className={classes.root}
+                                            id="firstname"
+                                            placeholder="First Name"
+                                            onChange={handleChange}
+                                            value={values.firstname}
+                                            variant="outlined"
+                                        />
+
+                                        {errors.firstname && touched.firstname ? (
+                                            <div>{errors.firstname}</div>
+                                        ) : null}
+
+                                    </Grid>
+                                    <Grid item md={6} className={classes.item}>
+                                        <TextField
+                                            className={classes.root}
+                                            id="email"
+                                            placeholder="Email"
+                                            onChange={handleChange}
+                                            value={values.email}
+                                            variant="outlined"
+                                        />
+
+                                        {errors.email && touched.email ? (
+                                            <div>{errors.email}</div>
+                                        ) : null}
+
+                                    </Grid>
+                                    <Grid item xs={12} className={classes.item}>
+                                        <TextField
+                                            className={classes.root}
+                                            id="password"
+                                            placeholder="Your Password"
+                                            onChange={handleChange}
+                                            value={values.password}
+                                            variant="outlined"
+                                        />
+
+                                        {errors.password && touched.password ? (
+                                            <div>{errors.password}</div>
+                                        ) : null}
+
+                                    </Grid>
+                                    <Grid item xs={12} className={classes.item}>
+                                        <TextField
+                                            className={classes.root}
+                                            id="password_confirmation"
+                                            placeholder="Password Confirmation"
+                                            onChange={handleChange}
+                                            value={values.password_confirmation}
+                                            variant="outlined"
+                                        />
+
+                                        {errors.password_confirmation && touched.password_confirmation ? (
+                                            <div>{errors.password_confirmation}</div>
+                                        ) : null}
+
+                                    </Grid>
+                                    <Grid item xs={12} className={classes.item}>
+                                        <Box display='flex' justifyContent='center'>
+                                            <Button type='submit' variant="contained" color="primary">
+                                                Sign Up
+                                            </Button>
+                                        </Box>
+                                    </Grid>
+                                </Grid>
+                            </Form>
+                        )}
+
+                    </Formik>
+
                 </Box>
 
             </MainLayout>
