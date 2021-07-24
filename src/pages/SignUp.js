@@ -22,17 +22,17 @@ const SignUp = () => {
         firstname: Yup.string()
             .min(2, 'Too Short!')
             .max(50, 'Too Long!')
-            .required('Required'),
+            .required('შევსება აუცილებელია'),
         password: Yup.string()
             .min(6, 'Too Short!')
             .max(50, 'Too Long!')
-            .required('Required'),
+            .required('შევსება აუცილებელია'),
         password_confirmation: Yup.string()
             .min(6, 'Too Short!')
             .max(50, 'Too Long!')
-            .oneOf([Yup.ref('password'), null], 'Passwords must match')
-            .required('Required'),
-        email: Yup.string().email('Invalid email').required('Required'),
+            .oneOf([Yup.ref('password'), null], 'შეიყვანეთ იგივე პაროლი')
+            .required('შევსება აუცილებელია'),
+        email: Yup.string().email('Invalid email').required('შევსება აუცილებელია'),
     });
 
 
@@ -74,18 +74,20 @@ const SignUp = () => {
                                 }
                             }).then(respos => {
                                 setSuccess(true)
-
                                 if (respos.status == 422) {
                                     setMsg('error')
-                                    setSuccessText('დაფიქსირდა შეცდომა')
+                                    setErrorText('მაილი უკვე გამოყენებულია, სცადეთ სხვა მაილი')
+                                    setTimeout(() => {
+                                        setSuccess(false)
+                                    }, 2000)
                                 } else {
                                     setMsg('success')
                                     setSuccessText('თქვენ წარმატებით დარეგისტრირდით')
                                     console.log('then')
+                                    setTimeout(() => {
+                                        setLogin(true)
+                                    }, 2000)
                                 }
-                                // setTimeout(() => {
-                                //     setLogin(true)
-                                // }, 1500)
                             }
                             )
 

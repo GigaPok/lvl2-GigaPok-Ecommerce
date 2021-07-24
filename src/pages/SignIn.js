@@ -57,17 +57,27 @@ const SignIn = () => {
                             }).catch(error => console.log(error))
                                 .then(res => res.json())
                                 .then(json => {
-                                    localStorage.setItem('userInfo', JSON.stringify(json),
 
-                                        setMsg('success'),
-                                        setSuccess(true),
-                                        setSuccessText('ინფორმაცია სწორია'),
+                                    setSuccess(true)
+
+                                    if (json.errors) {
+                                        setMsg('error')
+                                        setErrorText('მონაცემები არასწორია')
+                                        setTimeout(() => {
+                                            setSuccess(false)
+                                        }, 2000)
+                                    } else {
+
+                                        localStorage.setItem('userInfo', JSON.stringify(json))
+                                        setMsg('success')
+                                        setSuccessText('ინფორმაცია სწორია')
 
                                         setTimeout(() => {
                                             setSuccess(false)
                                         }, 2000)
-                                    );
-                                })
+                                    }
+
+                                }).catch(error => console.log('err', error))
                         }} >
                         {({ errors, touched, handleChange, values }) => (
                             <Form>
