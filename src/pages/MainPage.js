@@ -34,7 +34,7 @@ const MainPage = () => {
                 <Typography className={classes.shopText} variant="h2">Shop</Typography>
             </Box>
             <MainLayout>
-                <Grid container spacing={2} wrap>
+                <Grid container spacing={2}>
                     <Grid item xs={12} md={4}>
                         <SideBar></SideBar>
                     </Grid>

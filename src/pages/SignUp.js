@@ -72,17 +72,24 @@ const SignUp = () => {
                                     'Content-Type': 'application/json',
                                     'Accept': 'application/json'
                                 }
-                            }).then(
-                                setMsg('success'),
-                                setSuccess(true),
-                                setSuccessText('თქვენ წარმატებით დარეგისტრირდით'),
+                            }).then(respos => {
+                                setSuccess(true)
 
-                                setTimeout(() => {
-                                    setLogin(true)
-                                }, 1500)
+                                if (respos.status == 422) {
+                                    setMsg('error')
+                                    setSuccessText('დაფიქსირდა შეცდომა')
+                                } else {
+                                    setMsg('success')
+                                    setSuccessText('თქვენ წარმატებით დარეგისტრირდით')
+                                    console.log('then')
+                                }
+                                // setTimeout(() => {
+                                //     setLogin(true)
+                                // }, 1500)
+                            }
                             )
 
-                                .catch(error => console.log(error))
+                                .catch(error => console.log('error', error))
                         }}>
                         {({ errors, touched, handleChange, values }) => (
                             <Form>

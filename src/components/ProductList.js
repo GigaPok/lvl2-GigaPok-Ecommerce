@@ -14,6 +14,7 @@ const ProductList = () => {
 
     const [data, setData] = useState()
     const [loading, setLoading] = useState(false)
+    const [page, setPage] = useState(1)
 
     useEffect(() => {
         setLoading(true)
@@ -22,10 +23,16 @@ const ProductList = () => {
             .finally(() => setLoading(false))
     }, [])
 
+    useEffect(() => {
+        setLoading(true)
+        fetch(`https://fakestoreapi.com/products?page=${page}`)
+            .then(res => res.json())
+            .then(data => setData(data))
+            .finally(() => setLoading(false))
+    }, [page]);
     const onChange = (e, p) => {
-        getAllProduct(p)
+        setPage(p)
     }
-
     return (
         <>
             {data && (
@@ -33,7 +40,7 @@ const ProductList = () => {
                     <Box className={classes.rame}>
                         <ItemStyle></ItemStyle>
                         <Typography>Label example</Typography>
-                        <Pagination count={11} defaultPage={1} onChange={onChange} />
+                        <Pagination count={11} defaultPage={page} page={page} onChange={onChange} />
                     </Box>
                     <Loading isLoading={loading}>
                         <Grid container spacing={2}>
@@ -46,7 +53,7 @@ const ProductList = () => {
                         <Box className={classes.rame}>
                             <ItemStyle></ItemStyle>
                             <Typography>Label example</Typography>
-                            <Pagination count={11} defaultPage={1} onChange={onChange} />
+                            <Pagination count={11} defaultPage={page} page={page} onChange={onChange} />
                         </Box>
                     </Loading>
                 </>
