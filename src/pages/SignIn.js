@@ -44,7 +44,6 @@ const SignIn = () => {
                         validationSchema={SignupSchema}
                         onSubmit={values => {
 
-                            console.log(values);
 
                             fetch('http://159.65.126.180/api/auth/login', {
                                 method: "POST",
