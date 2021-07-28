@@ -15,6 +15,7 @@ const MainLayout = ({ children }) => {
             ...userData.data,
             isLoggedIn: false,
         })
+        localStorage.removeItem('userInfo');
     }
 
     const classes = useStyles()

@@ -1,30 +1,33 @@
 import React, { useState } from 'react';
 
-let log;
+let log = false;
 
 const user = JSON.parse(localStorage.getItem('userInfo'));
 
-fetch('http://159.65.126.180/api/auth/me', {
-    method: "POST",
-    body: JSON.stringify(
-        {
-            access_token: user.token.access_token,
-        }
-    ),
-    headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-    }
-})
-    .then(res => {
-        if (res.status === 401) {
-            log = false;
-            localStorage.removeItem('userInfo');
-        } else {
-            log = true
+if ((user)) {
+
+    fetch('http://159.65.126.180/api/auth/me', {
+        method: "POST",
+        body: JSON.stringify(
+            {
+                access_token: user.token.access_token,
+            }
+        ),
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
         }
     })
-    .catch(error => console.log(error))
+        .then(res => {
+            if (res.status === 401) {
+                log = false;
+                localStorage.removeItem('userInfo');
+            } else {
+                log = true
+            }
+        })
+        .catch(error => console.log(error))
+}
 
 
 export const UserContext = React.createContext({})
