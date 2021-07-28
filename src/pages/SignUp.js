@@ -53,8 +53,6 @@ const SignUp = () => {
                         validationSchema={SignupSchema}
                         onSubmit={values => {
 
-                            console.log(values);
-
                             fetch('http://159.65.126.180/api/register', {
 
                                 method: "POST",
@@ -66,7 +64,6 @@ const SignUp = () => {
                                         password: values.password,
                                         password_confirmation: values.password_confirmation
                                     },
-
                                 ),
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -83,7 +80,6 @@ const SignUp = () => {
                                 } else {
                                     setMsg('success')
                                     setSuccessText('თქვენ წარმატებით დარეგისტრირდით')
-                                    console.log('then')
                                     setTimeout(() => {
                                         setLogin(true)
                                     }, 2000)

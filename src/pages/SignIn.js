@@ -1,13 +1,16 @@
 import { Box, Button, Grid, TextField } from '@material-ui/core';
 import { Form, Formik, useFormik } from 'formik';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import MainLayout from '../layouts/MainLayout';
 import { useStyles } from './SignInStyle';
 import * as Yup from 'yup';
 import ALertMsg from '../components/AlertMsg';
+import { UserContext } from '../store/UserContext';
 
 
 const SignIn = () => {
+
+    const userData = useContext(UserContext)
 
     const [success, setSuccess] = useState(false)
     const [msg, setMsg] = useState('')
@@ -26,6 +29,7 @@ const SignIn = () => {
             .max(50, 'Too Long!')
             .required('Required')
     });
+
 
     return (
         <>
@@ -71,6 +75,12 @@ const SignIn = () => {
                                         localStorage.setItem('userInfo', JSON.stringify(json))
                                         setMsg('success')
                                         setSuccessText('ინფორმაცია სწორია')
+
+                                        userData.setData({
+
+                                            ...userData.data,
+                                            isLoggedIn: true,
+                                        })
 
                                         setTimeout(() => {
                                             setSuccess(false)

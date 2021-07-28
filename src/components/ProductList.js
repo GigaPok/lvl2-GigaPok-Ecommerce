@@ -14,7 +14,7 @@ const ProductList = () => {
 
     const [data, setData] = useState()
     const [loading, setLoading] = useState(false)
-    const [page, setPage] = useState(1)
+    const [page, setPage] = useState(6)
 
     useEffect(() => {
         setLoading(true)
