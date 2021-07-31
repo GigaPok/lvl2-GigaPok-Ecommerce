@@ -7,6 +7,7 @@ import { useStyles } from './SignInStyle';
 import { Sign_In } from '../router';
 import * as Yup from 'yup';
 import ALertMsg from '../components/AlertMsg';
+import { register } from '../services/auth';
 
 const SignUp = () => {
 
@@ -45,48 +46,30 @@ const SignUp = () => {
                 <Box my={20}>
                     <Formik
                         initialValues={{
-                            firstname: '',
+                            name: '',
                             email: '',
                             password: '',
                             password_confirmation: '',
                         }}
                         validationSchema={SignupSchema}
-                        onSubmit={values => {
-
-                            fetch('http://159.65.126.180/api/register', {
-
-                                method: "POST",
-                                body: JSON.stringify(
-
-                                    {
-                                        name: values.firstname,
-                                        email: values.email,
-                                        password: values.password,
-                                        password_confirmation: values.password_confirmation
-                                    },
-                                ),
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'Accept': 'application/json'
-                                }
-                            }).then(respos => {
-                                setSuccess(true)
-                                if (respos.status == 422) {
-                                    setMsg('error')
-                                    setErrorText('მაილი უკვე გამოყენებულია, სცადეთ სხვა მაილი')
-                                    setTimeout(() => {
-                                        setSuccess(false)
-                                    }, 2000)
-                                } else {
-                                    setMsg('success')
-                                    setSuccessText('თქვენ წარმატებით დარეგისტრირდით')
-                                    setTimeout(() => {
-                                        setLogin(true)
-                                    }, 2000)
-                                }
-                            }
-                            )
-
+                        onSubmit={body => {
+                            register(body)
+                                .then(respos => {
+                                    setSuccess(true)
+                                    if (respos.status === 422) {
+                                        setMsg('error')
+                                        setErrorText('მაილი უკვე გამოყენებულია, სცადეთ სხვა მაილი')
+                                        setTimeout(() => {
+                                            setSuccess(false)
+                                        }, 2000)
+                                    } else {
+                                        setMsg('success')
+                                        setSuccessText('თქვენ წარმატებით დარეგისტრირდით')
+                                        setTimeout(() => {
+                                            setLogin(true)
+                                        }, 2000)
+                                    }
+                                })
                                 .catch(error => console.log('error', error))
                         }}>
                         {({ errors, touched, handleChange, values }) => (
@@ -95,10 +78,10 @@ const SignUp = () => {
                                     <Grid item md={6} className={classes.item}>
                                         <TextField
                                             className={classes.root}
-                                            id="firstname"
+                                            id="name"
                                             label="First Name"
                                             onChange={handleChange}
-                                            value={values.firstname}
+                                            value={values.name}
                                             variant="outlined"
                                         />
 

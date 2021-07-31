@@ -16,11 +16,11 @@ const transfer = (body) => JSON.stringify(
     category: body.Img
   })
 
-export const getAllProduct = () => getAll(slug)
+export const getAllProduct = (page) => getAll({ slug: `${slug}?page=${page}` })
   .then(data => data.map(el => mapper(el)))
 
-export const getSingleProduct = (id) => getSinge(slug, id)
+export const getSingleProduct = (id) => getSinge({ slug }, id)
   .then(data => mapper(data));
 
-export const createProduct = (body) => create(slug, transfer(body))
+export const createProduct = (body) => create({ slug, body: transfer(body) })
 

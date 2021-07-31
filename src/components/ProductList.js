@@ -8,13 +8,29 @@ import Loading from './Loading';
 import useStyles from './productListStyle';
 import ItemStyle from './ItemStyle';
 import Pagination from '@material-ui/lab/Pagination';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
+
+function useQuery() {
+    const params = {};
+
+    useLocation().search.replace('?', '').split('&')
+        .forEach(item => {
+            const split = item.split('=');
+            params[split[0]] = split[1];
+        });
+
+    return params;
+}
+
 const ProductList = () => {
 
     const classes = useStyles()
+    const history = useHistory();
+    const params = useQuery();
 
     const [data, setData] = useState()
     const [loading, setLoading] = useState(false)
-    const [page, setPage] = useState(6)
+    const [page, setPage] = useState(+params.page || 1)
 
     useEffect(() => {
         setLoading(true)
@@ -25,14 +41,12 @@ const ProductList = () => {
 
     useEffect(() => {
         setLoading(true)
-        fetch(`https://fakestoreapi.com/products?page=${page}`)
+        getAllProduct(page)
             .then(res => res.json())
             .then(data => setData(data))
-            .finally(() => setLoading(false))
+            .finally(() => setLoading(false), page > 1 && history.push(`/?page=${page}`))
     }, [page]);
-    const onChange = (e, p) => {
-        setPage(p)
-    }
+
     return (
         <>
             {data && (
@@ -40,7 +54,7 @@ const ProductList = () => {
                     <Box className={classes.rame}>
                         <ItemStyle></ItemStyle>
                         <Typography>Label example</Typography>
-                        <Pagination count={11} defaultPage={page} page={page} onChange={onChange} />
+                        <Pagination count={11} defaultPage={page} page={page} onChange={(_, p) => setPage(p)} />
                     </Box>
                     <Loading isLoading={loading}>
                         <Grid container spacing={2}>
@@ -53,12 +67,11 @@ const ProductList = () => {
                         <Box className={classes.rame}>
                             <ItemStyle></ItemStyle>
                             <Typography>Label example</Typography>
-                            <Pagination count={11} defaultPage={page} page={page} onChange={onChange} />
+                            <Pagination count={11} defaultPage={page} page={page} onChange={(_, p) => setPage(p)} />
                         </Box>
                     </Loading>
                 </>
             )}
-
         </>
     );
 };

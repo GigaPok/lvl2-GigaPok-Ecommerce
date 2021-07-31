@@ -9,9 +9,18 @@ import { Product_List, HOME, Single_Product, Admin_Panel, Sign_In, Sign_Up } fro
 import AdminPanel from './layouts/AdminPanel'
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
-
+import React, { useContext, useEffect } from 'react';
+import { UserContext } from './store/UserContext';
+import { checkUser } from './services/auth';
 
 function App() {
+  const { data } = useContext(UserContext);
+
+  useEffect(() => {
+    if (!data.user) return;
+
+    checkUser();
+  });
 
   return (
     <div className="App">

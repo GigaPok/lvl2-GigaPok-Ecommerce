@@ -1,11 +1,12 @@
 import { Box, Button, Grid, TextField } from '@material-ui/core';
-import { Form, Formik, useFormik } from 'formik';
+import { Form, Formik } from 'formik';
 import React, { useContext, useState } from 'react';
 import MainLayout from '../layouts/MainLayout';
 import { useStyles } from './SignInStyle';
 import * as Yup from 'yup';
 import ALertMsg from '../components/AlertMsg';
 import { UserContext } from '../store/UserContext';
+import { login } from '../services/auth';
 
 
 const SignIn = () => {
@@ -42,23 +43,9 @@ const SignIn = () => {
                             password: '',
                         }}
                         validationSchema={SignupSchema}
-                        onSubmit={values => {
-
-
-                            fetch('http://159.65.126.180/api/auth/login', {
-                                method: "POST",
-                                body: JSON.stringify(
-                                    {
-                                        email: values.email,
-                                        password: values.password,
-                                    }
-                                ),
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'Accept': 'application/json'
-                                }
-                            }).catch(error => console.log(error))
-                                .then(res => res.json())
+                        onSubmit={body => {
+                            login(body)
+                                .catch(error => console.log(error))
                                 .then(json => {
 
                                     setSuccess(true)

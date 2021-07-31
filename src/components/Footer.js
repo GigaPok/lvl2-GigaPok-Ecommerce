@@ -32,34 +32,34 @@ const Footer = () => {
                         <Box display="flex">
                             <Box>
                                 <Link color="inherit">
-                                    <i class="fab fa-facebook-f"></i>
+                                    <i className="fab fa-facebook-f"></i>
                                 </Link>
                             </Box>
                             <Box mx={2}>
                                 <Link color="inherit">
-                                    <i class="fab fa-twitter"></i>
+                                    <i className="fab fa-twitter"></i>
                                 </Link>
                             </Box>
                             <Box>
                                 <Link color="inherit">
-                                    <i class="fab fa-google-plus-g"></i>
+                                    <i className="fab fa-google-plus-g"></i>
                                 </Link>
                             </Box>
                             <Box mx={2}>
                                 <Link color="inherit">
-                                    <i class="fab fa-invision"></i>
+                                    <i className="fab fa-invision"></i>
                                 </Link>
                             </Box>
                             <Box>
                                 <Link color="inherit">
-                                    <i class="fab fa-instagram"></i>
+                                    <i className="fab fa-instagram"></i>
                                 </Link>
                             </Box>
                         </Box>
                     </Toolbar>
                 </Container>
             </AppBar>
-            <Box className={classes.bcolor} color='white'>
+            <Box className={classes.bcolor}>
                 <Container maxWidth='lg'>
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={3}>

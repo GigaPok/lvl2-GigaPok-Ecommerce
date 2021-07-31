@@ -1,5 +1,5 @@
 import { AppBar, Box, Button, Container, Grid, Toolbar, Typography } from '@material-ui/core';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import { Admin_Panel, Sign_In, Sign_Up } from '../router';
@@ -21,31 +21,30 @@ const MainLayout = ({ children }) => {
     const classes = useStyles()
 
     return (
-
         <>
             <Container>
                 <Grid>
                     <Grid item xs={12}>
-                        <AppBar position="fixed" color='white'>
+                        <AppBar position="fixed" color='default'>
                             <Toolbar variant="dense">
                                 <Typography variant="h6" className={classes.title}>
                                     <Link to='/'>
-                                        <i class="fab fa-mdb fa-3x" alt="mdb logo"></i>
+                                        <i className="fab fa-mdb fa-3x" alt="mdb logo"></i>
                                     </Link>
                                 </Typography>
                                 <Box>
-                                    <Link className={classes.a} color='white'>Contact</Link>
+                                    <Link to='/' className={classes.a}>Contact</Link>
                                 </Box>
                                 <Box mx={2}>
-                                    <Link className={classes.a} color='white' to={Admin_Panel}>Admin Panel</Link>
+                                    <Link className={classes.a} to={Admin_Panel}>Admin Panel</Link>
                                 </Box>
                                 {userData.data.isLoggedIn ?
-                                    <Link onClick={Loguet}>
+                                    <Link to='/' onClick={Loguet}>
                                         <Button variant="contained" color="primary">Loguet</Button>
                                     </Link>
                                     : <Box display='flex' alignItems='center'>
                                         <Box mr={2}>
-                                            <Link className={classes.a} to={Sign_In} color='white'>Sign In</Link>
+                                            <Link className={classes.a} to={Sign_In}>Sign In</Link>
                                         </Box>
                                         <Link to={Sign_Up}>
                                             <Button variant="contained" color="primary">Sign Up</Button>

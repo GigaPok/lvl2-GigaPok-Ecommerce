@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import SearchIcon from '@material-ui/icons/Search';
@@ -14,17 +14,12 @@ const useStyles = makeStyles((theme) => ({
 
 const Search = ({ label, noshow }) => {
     const classes = useStyles();
-    const [show, setShow] = useState(true)
-
-    useEffect(() => {
-        setShow(noshow)
-    }, [])
 
     return (
         <form className={classes.root} noValidate autoComplete="off">
             <Box className={classes.search}>
                 <TextField id="outlined-basic" label={label} variant="outlined" />
-                {show ? <SearchIcon></SearchIcon> : null}
+                {noshow ? <SearchIcon></SearchIcon> : null}
             </Box>
 
         </form>

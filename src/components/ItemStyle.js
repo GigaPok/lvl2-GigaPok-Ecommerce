@@ -14,10 +14,10 @@ const ItemStyle = () => {
     return (
         <Box display='flex'>
             <Box className={classes.rame}>
-                <i class="fas fa-th-list fa-lg mr-1"></i>
+                <i className="fas fa-th-list fa-lg mr-1"></i>
             </Box>
             <Box>
-                <i class="fas fa-th-large fa-lg"></i>
+                <i className="fas fa-th-large fa-lg"></i>
             </Box>
         </Box>
     );
