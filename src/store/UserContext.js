@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-let log = false;
+let log;
 
 const user = JSON.parse(localStorage.getItem('userInfo'));
 
@@ -15,20 +15,22 @@ if ((user)) {
         ),
         headers: {
             'Content-Type': 'application/json',
-            'Accept': 'application/json'
+            'Authorization': `Bearer ${user.token.access_token}`
         }
     })
         .then(res => {
             if (res.status === 401) {
                 log = false;
                 localStorage.removeItem('userInfo');
+                console.log('Error')
+
             } else {
                 log = true
+                console.log(' Succces')
             }
         })
         .catch(error => console.log(error))
 }
-
 
 export const UserContext = React.createContext({})
 
