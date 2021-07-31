@@ -42,9 +42,8 @@ const ProductList = () => {
     useEffect(() => {
         setLoading(true)
         getAllProduct(page)
-            .then(res => res.json())
             .then(data => setData(data))
-            .finally(() => setLoading(false), page > 1 && history.push(`/?page=${page}`))
+            .finally(() => setLoading(false), history.push(`/${page > 1 ? `?page=${page}` : ''}`))
     }, [page]);
 
     return (

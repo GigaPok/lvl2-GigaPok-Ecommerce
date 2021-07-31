@@ -29,7 +29,7 @@ function App() {
           <Route path={Product_List} component={Colors} exact />
           <Route path={Single_Product} component={SinglePage} exact />
           <Route path={HOME} component={MainPage} exact />
-          <Route path={Admin_Panel} component={AdminPanel} />
+          {data.isLoggedIn && <Route path={Admin_Panel} component={AdminPanel} />}
           <Route path={Sign_In} component={SignIn} exact />
           <Route path={Sign_Up} component={SignUp} exact />
           <Route component={NotFound} />
