@@ -1,22 +1,16 @@
 import { Box, Button, Grid, TextField } from '@material-ui/core';
 import { Form, Formik } from 'formik';
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import MainLayout from '../layouts/MainLayout';
 import { useStyles } from './SignInStyle';
 import * as Yup from 'yup';
-import ALertMsg from '../components/AlertMsg';
-import { UserContext } from '../store/UserContext';
-import { login } from '../services/auth';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../store/user/userActions';
 
 
 const SignIn = () => {
 
-    const userData = useContext(UserContext)
-
-    const [success, setSuccess] = useState(false)
-    const [msg, setMsg] = useState('')
-    const [succesText, setSuccessText] = useState('')
-    const [errorText, setErrorText] = useState('')
+    const dispatch = useDispatch()
 
     const classes = useStyles()
 
@@ -44,36 +38,7 @@ const SignIn = () => {
                         }}
                         validationSchema={SignupSchema}
                         onSubmit={body => {
-                            login(body)
-                                .catch(error => console.log(error))
-                                .then(json => {
-
-                                    setSuccess(true)
-
-                                    if (json.errors) {
-                                        setMsg('error')
-                                        setErrorText('მონაცემები არასწორია')
-                                        setTimeout(() => {
-                                            setSuccess(false)
-                                        }, 2000)
-                                    } else {
-
-                                        localStorage.setItem('userInfo', JSON.stringify(json))
-                                        setMsg('success')
-                                        setSuccessText('ინფორმაცია სწორია')
-
-                                        userData.setData({
-
-                                            ...userData.data,
-                                            isLoggedIn: true,
-                                        })
-
-                                        setTimeout(() => {
-                                            setSuccess(false)
-                                        }, 2000)
-                                    }
-
-                                }).catch(error => console.log('err', error))
+                            dispatch(loginUser(body))
                         }} >
                         {({ errors, touched, handleChange, values }) => (
                             <Form>
@@ -114,7 +79,6 @@ const SignIn = () => {
                                                 Sign In
                                             </Button>
                                         </Box>
-                                        {success ? <ALertMsg msg={msg} succesText={succesText} errorText={errorText} /> : ''}
                                     </Grid>
                                 </Grid>
                             </Form>

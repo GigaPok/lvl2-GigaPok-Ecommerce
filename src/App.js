@@ -9,18 +9,28 @@ import { Product_List, HOME, Single_Product, Admin_Panel, Sign_In, Sign_Up } fro
 import AdminPanel from './layouts/AdminPanel'
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
-import React, { useContext, useEffect } from 'react';
-import { UserContext } from './store/UserContext';
+import React, { useEffect } from 'react';
 import { checkUser } from './services/auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectUser } from './store/user/userSelector';
+import { loginUser } from './store/user/userActions';
 
 function App() {
-  const { data } = useContext(UserContext);
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    if (!data.user) return;
-
+    if (!user.user) return;
     checkUser();
   });
+
+  useEffect(() => {
+    dispatch(loginUser)
+  }, []);
+
+  const user = useSelector(selectUser)
+
+  console.log(user);
 
   return (
     <div className="App">
@@ -29,7 +39,7 @@ function App() {
           <Route path={Product_List} component={Colors} exact />
           <Route path={Single_Product} component={SinglePage} exact />
           <Route path={HOME} component={MainPage} exact />
-          {data.isLoggedIn && <Route path={Admin_Panel} component={AdminPanel} />}
+          {user.isLoggedIn && <Route path={Admin_Panel} component={AdminPanel} />}
           <Route path={Sign_In} component={SignIn} exact />
           <Route path={Sign_Up} component={SignUp} exact />
           <Route component={NotFound} />
