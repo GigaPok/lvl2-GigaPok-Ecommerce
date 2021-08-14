@@ -5,6 +5,7 @@ export const loginUser = (body) => (dispatch) => {
 
     login(body)
         .then(data => {
+            console.log('es', data);
             if (data.errors) {
                 console.log('erori');
             } else {
