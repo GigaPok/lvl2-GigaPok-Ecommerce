@@ -11,24 +11,18 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import React, { useEffect } from 'react';
 import { checkUser } from './services/auth';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectUser } from './store/user/userSelector';
-import { loginUser } from './store/user/userActions';
 
 function App() {
 
-  const dispatch = useDispatch()
+  const user = useSelector(selectUser)
 
   useEffect(() => {
     if (!user.user) return;
     checkUser();
   });
 
-  useEffect(() => {
-    dispatch(loginUser)
-  }, []);
-
-  const user = useSelector(selectUser)
 
   console.log(user);
 

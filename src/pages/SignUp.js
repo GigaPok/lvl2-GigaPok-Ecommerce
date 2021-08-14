@@ -20,7 +20,7 @@ const SignUp = () => {
 
 
     const SignupSchema = Yup.object().shape({
-        firstname: Yup.string()
+        name: Yup.string()
             .min(2, 'Too Short!')
             .max(50, 'Too Long!')
             .required('შევსება აუცილებელია'),
