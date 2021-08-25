@@ -13,6 +13,9 @@ export const loginUser = (body) => (dispatch) => {
                 dispatch(setToken(data.token.access_token))
                 localStorage.setItem('userInfo', JSON.stringify(data))
             }
+
+            return data
+
         })
         .catch(error => console.log('err', error))
 }

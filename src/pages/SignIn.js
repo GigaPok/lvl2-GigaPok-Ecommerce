@@ -4,13 +4,20 @@ import React from 'react';
 import MainLayout from '../layouts/MainLayout';
 import { useStyles } from './SignInStyle';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../store/user/userActions';
+import { Redirect, useHistory } from 'react-router-dom';
+import { Profile } from '../router';
+import { isLogginIn } from '../store/user/userSelector';
 
 
 const SignIn = () => {
 
     const dispatch = useDispatch()
+    const history = useHistory();
+
+    const user = useSelector(isLogginIn)
+
 
     const classes = useStyles()
 
@@ -39,6 +46,8 @@ const SignIn = () => {
                         validationSchema={SignupSchema}
                         onSubmit={body => {
                             dispatch(loginUser(body))
+                            // .then(() => { history.push(Profile) })
+
                         }} >
                         {({ errors, touched, handleChange, values }) => (
                             <Form>
@@ -86,6 +95,7 @@ const SignIn = () => {
                     </Formik>
                 </Box>
             </MainLayout>
+            {user && <Redirect to={Profile} />}
         </>
     );
 };

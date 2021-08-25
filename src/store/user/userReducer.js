@@ -1,9 +1,7 @@
-import { SET_TOKEN, SET_USER } from "./userActionsConst"
+import { LOGOUT, SET_TOKEN, SET_USER } from "./userActionsConst"
 
 const initialState = {
     user: {},
-    isLogginIn: false,
-    isLoggedIn: false,
     token: ''
 }
 
@@ -20,6 +18,12 @@ export default function userReducer(state = initialState, action) {
             return {
                 ...state,
                 token: action.token
+            }
+        case LOGOUT:
+            return {
+                ...state,
+                user: {},
+                token: '',
             }
 
         default:

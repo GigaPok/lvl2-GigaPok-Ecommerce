@@ -1,4 +1,4 @@
-import { SET_TOKEN, SET_USER } from "./userActionsConst"
+import { LOGOUT, SET_TOKEN, SET_USER } from "./userActionsConst"
 
 export const setUser = (user) => {
     return {
@@ -12,5 +12,11 @@ export const setToken = (token) => {
     return {
         type: SET_TOKEN,
         token,
+    }
+}
+
+export const logout = () => {
+    return {
+        type: LOGOUT,
     }
 }

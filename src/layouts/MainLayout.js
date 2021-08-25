@@ -1,21 +1,24 @@
 import { AppBar, Box, Button, Container, Grid, Toolbar, Typography } from '@material-ui/core';
-import React, { useContext } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import { Admin_Panel, Sign_In, Sign_Up } from '../router';
-import { UserContext } from '../store/UserContext';
+import { logout } from '../store/user/userActionCreator';
+import { isLogginIn } from '../store/user/userSelector';
 import useStyles from './MainLayoutStyles';
 
 const MainLayout = ({ children }) => {
 
-    const userData = useContext(UserContext)
+    const dispatch = useDispatch()
+
+    const user = useSelector(isLogginIn)
+
+    console.log('esLoguet', user);
 
     const Loguet = () => {
-        userData.setData({
-            ...userData.data,
-            isLoggedIn: false,
-        })
-        localStorage.removeItem('userInfo');
+        dispatch(logout())
+        localStorage.removeItem('userInfo')
     }
 
     const classes = useStyles()
@@ -38,7 +41,7 @@ const MainLayout = ({ children }) => {
                                 <Box mx={2}>
                                     <Link className={classes.a} to={Admin_Panel}>Admin Panel</Link>
                                 </Box>
-                                {userData.data.isLoggedIn ?
+                                {user ?
                                     <Link to='/' onClick={Loguet}>
                                         <Button variant="contained" color="primary">Loguet</Button>
                                     </Link>

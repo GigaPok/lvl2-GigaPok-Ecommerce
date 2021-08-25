@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { Box, Icon } from '@material-ui/core';
@@ -35,8 +35,8 @@ const useStyles = makeStyles((theme) => ({
 const AdminModal = () => {
     const classes = useStyles();
 
-    const [modalStyle] = React.useState(getModalStyle);
-    const [open, setOpen] = React.useState(false);
+    const [modalStyle] = useState(getModalStyle);
+    const [open, setOpen] = useState(false);
 
     const handleOpen = () => {
         setOpen(true);
