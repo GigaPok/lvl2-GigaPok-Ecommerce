@@ -7,7 +7,8 @@ const user = JSON.parse(localStorage.getItem('userInfo'));
 export const UserContextProvider = ({ children }) => {
     const [data, setData] = useState({
         isLoggedIn: !!user,
-        user
+        user,
+        cart: []
     });
 
     return (

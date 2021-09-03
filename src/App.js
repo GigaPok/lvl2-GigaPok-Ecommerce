@@ -13,7 +13,7 @@ import React, { useEffect } from 'react';
 import { checkUser } from './services/auth';
 import { useSelector } from 'react-redux';
 import { isLogginIn, selectUser } from './store/user/userSelector';
-import ProfilePage from './pages/ProfilePage';
+import ProfilePage from './pages/profilePage/ProfilePage';
 
 function App() {
 

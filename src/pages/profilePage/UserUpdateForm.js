@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
-import useStyles from './formStyle';
 import ALertMsg from '../../components/AlertMsg';
-import { createProduct } from '../../services/product'
+import useStyles from '../../components/productListStyle';
+import { userUpdate } from '../../services/auth';
+import { selectUser } from '../../store/user/userSelector';
+import { useSelector, useDispatch } from 'react-redux';
+import { setUser } from '../../store/user/userActionCreator';
 
 const initMessage = {
     type: null,
@@ -10,30 +13,29 @@ const initMessage = {
     isVisible: false,
 }
 
-const AddProductForm = () => {
+const UserUpdateForm = () => {
 
     const [message, setMessage] = useState(initMessage);
-
+    const user = useSelector(selectUser);
+    const dispatch = useDispatch()
     const classes = useStyles();
 
     const formik = useFormik({
         initialValues: {
-            Title: '',
-            Price: '',
-            Img: '',
+            name: user.name,
         },
         onSubmit: (values, { setSubmitting }) => {
 
-            createProduct(values)
-                .then(json => console.log('Response', json))
-                .then(() => {
+            userUpdate(values, user.id)
+                .then(user => {
                     setMessage({
                         type: 'success',
                         text: 'წარმატებით დაემატა',
                         isVisible: true,
                     });
+                    dispatch(setUser(user));
                 })
-                .catch((error) => {
+                .catch(() => {
                     setMessage({
                         type: 'error',
                         text: 'დაფიქსირდა შეცდომა',
@@ -48,38 +50,18 @@ const AddProductForm = () => {
                     setSubmitting(false);
                 })
 
-            console.log('values', values);
-
         },
     });
     return (
         <>
             <form className={classes.form} onSubmit={formik.handleSubmit}>
-                <label htmlFor="Title">Title</label>
+                <label htmlFor="Name">Name</label>
                 <input
-                    id="Title"
-                    name="Title"
+                    id="Name"
+                    name="name"
                     type="text"
                     onChange={formik.handleChange}
-                    value={formik.values.firstName}
-                />
-
-                <label htmlFor="Price">Price</label>
-                <input
-                    id="Price"
-                    name="Price"
-                    type="number"
-                    onChange={formik.handleChange}
-                    value={formik.values.lastName}
-                />
-
-                <label htmlFor="IMG">IMG</label>
-                <input
-                    id="Img"
-                    name="Img"
-                    type="text"
-                    onChange={formik.handleChange}
-                    value={formik.values.email}
+                    value={formik.values.name}
                 />
 
                 <button disabled={formik.isSubmitting} type="submit">Submit</button>
@@ -89,4 +71,4 @@ const AddProductForm = () => {
     );
 };
 
-export default AddProductForm;
+export default UserUpdateForm;

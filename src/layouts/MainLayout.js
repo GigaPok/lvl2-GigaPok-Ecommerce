@@ -61,9 +61,7 @@ const MainLayout = ({ children }) => {
             <Container maxWidth='lg'>
                 {children}
             </Container>
-            <Footer>
-
-            </Footer>
+            <Footer />
         </>
     );
 };

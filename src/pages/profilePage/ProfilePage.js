@@ -1,9 +1,9 @@
 import { Box, Button, Card, CardActionArea, CardActions, CardContent, CardMedia, makeStyles, Modal, Typography } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import MainLayout from '../layouts/MainLayout';
-import { selectUser } from '../store/user/userSelector';
-import AddProductForm from './adminPanel/AddProductForm';
+import MainLayout from '../../layouts/MainLayout';
+import { selectUser } from '../../store/user/userSelector';
+import UserUpdateForm from './UserUpdateForm';
 
 function rand() {
     return Math.round(Math.random() * 20) - 10;
@@ -55,7 +55,7 @@ const ProfilePage = () => {
 
     const body = (
         <div style={modalStyle} className={classes.paper}>
-            <AddProductForm></AddProductForm>
+            <UserUpdateForm></UserUpdateForm>
             <Box onClick={handleClose}>Close</Box>
         </div>
     );

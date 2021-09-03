@@ -4,9 +4,11 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+import { useDispatch } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import { Single_Product_ID } from '../router';
+import { addToCart } from '../store/cart/cartActionCreator';
 
 const useStyles = makeStyles({
     root: {
@@ -22,8 +24,9 @@ const useStyles = makeStyles({
 
 const CardItem = ({ title, price, image, id }) => {
 
-
     const classes = useStyles();
+    const dispatch = useDispatch()
+
     return (
         <>
             <Link to={`${Single_Product_ID}${id}`}>
@@ -46,6 +49,7 @@ const CardItem = ({ title, price, image, id }) => {
                     </CardActionArea>
                 </Card>
             </Link>
+            <button onClick={() => dispatch(addToCart(id))}>Add To cart</button>
         </>
     );
 }

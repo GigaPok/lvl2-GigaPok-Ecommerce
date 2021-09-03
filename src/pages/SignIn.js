@@ -46,7 +46,6 @@ const SignIn = () => {
                         validationSchema={SignupSchema}
                         onSubmit={body => {
                             dispatch(loginUser(body))
-                            // .then(() => { history.push(Profile) })
 
                         }} >
                         {({ errors, touched, handleChange, values }) => (
